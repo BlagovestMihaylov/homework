@@ -130,12 +130,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "Separator.cpp",
+			"path" : "separate/Separator.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Separator.h",
+			"path" : "separate/Separator.h",
 			"sourceGroupIndex" : 1
 		}
 	],
