@@ -1,0 +1,9 @@
+# ninja log v5
+1	602	6945740517525945	CMakeFiles/homework.dir/main.cpp.obj	eb0fb99f16c15d18
+5	641	6945740517905929	CMakeFiles/homework.dir/reading/NumbersReader.cpp.obj	b1afa6b05dc42cfb
+642	783	6945740519312545	homework.exe	190f01d3245ab826
+3	566	6945740656898550	CMakeFiles/homework.dir/main.cpp.obj	eb0fb99f16c15d18
+567	668	6945740657888524	homework.exe	190f01d3245ab826
+3	675	6945743226114731	CMakeFiles/homework.dir/main.cpp.obj	eb0fb99f16c15d18
+8	704	6945743226404740	CMakeFiles/homework.dir/reading/NumbersReader.cpp.obj	b1afa6b05dc42cfb
+704	801	6945743227364737	homework.exe	190f01d3245ab826
