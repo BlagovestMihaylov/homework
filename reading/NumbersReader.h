@@ -14,10 +14,10 @@ class NumbersReader {
 public:
     void ReadNumbers();
     std::vector<std::string> SplitInput() const;
-    std::string str() const;
+    std::string getInput() const;
 
 private:
-    std::string str_;
+    std::string input;
 
     static void SplitBraces(std::vector<std::string>& input) ;
 };

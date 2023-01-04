@@ -5,11 +5,11 @@
 
 void NumbersReader::ReadNumbers() {
     std::cout << "Enter a string: ";
-    std::getline(std::cin, str_);
+    std::getline(std::cin, input);
 }
 
 std::vector<std::string> NumbersReader::SplitInput() const {
-    std::istringstream iss(str_);
+    std::istringstream iss(input);
     std::vector<std::string> input;
     for (std::string word; iss >> word; ) {
         input.push_back(word);
@@ -18,8 +18,8 @@ std::vector<std::string> NumbersReader::SplitInput() const {
     return input;
 }
 
-std::string NumbersReader::str() const {
-    return str_;
+std::string NumbersReader::getInput() const {
+    return input;
 }
 
 void NumbersReader::SplitBraces(std::vector<std::string>& input) {
