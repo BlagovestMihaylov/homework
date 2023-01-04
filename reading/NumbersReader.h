@@ -18,6 +18,8 @@ public:
 
 private:
     std::string str_;
+
+    static void SplitBraces(std::vector<std::string>& input) ;
 };
 
 
