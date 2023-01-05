@@ -1,4 +1,4 @@
-C:\Users\blago\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\222.4345.21\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/Users/blago/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/bin/ninja/win/ninja.exe -G Ninja -S E:\data-structures-2022-2023\homework -B E:\data-structures-2022-2023\homework\cmake-build-debug
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /Users/blagovest.mihaylov/CLionProjects/homework -B /Users/blagovest.mihaylov/CLionProjects/homework/cmake-build-debug
 -- Configuring done
 -- Generating done
--- Build files have been written to: E:/data-structures-2022-2023/homework/cmake-build-debug
+-- Build files have been written to: /Users/blagovest.mihaylov/CLionProjects/homework/cmake-build-debug
