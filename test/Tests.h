@@ -27,7 +27,7 @@ public:
 
 TEST_CASE("NumbersReader Test") {
     NumbersReader reader;
-    reader.setInput("1 + 2 - 3 * 4 / 5 % 6 sqrt(7)* 8");
+    reader.setInput("1 + 2 - 3 * 4 / 5 % 6 sqrt(7)* 8"); //thats a bug - spliting ( and ) with extraspace
     std::vector<std::string> input = reader.SplitInput();
     CHECK(input ==
           std::vector<std::string>{"1", "+", "2", "-", "3", "*", "4", "/", "5", "%", "6", "sqrt", "(", "7", ")","*", "8"});
