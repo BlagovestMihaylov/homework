@@ -107,7 +107,7 @@ TEST_CASE("NumericChecker types to binary Test") {
     };
     std::map<std::string, std::string> expected_binary_representations = {
             {"123",    "1111011"},
-            {"123.45", "1111011.01101"},
+            {"123.45", "1111011.01110"},
             {"fff",    "111111111111"},
             {"aa",     "10101010"},
             {"0xfff",  "111111111111"},
@@ -122,6 +122,28 @@ TEST_CASE("NumericChecker types to binary Test") {
 
         CHECK(binary == toCheck);
     }
+}
+
+TEST_CASE("NumericChecker::DecimalToBinary Test") {
+    NumericChecker checker;
+    CHECK(checker.DecimalToBinary("123") == "1111011");
+    CHECK(checker.DecimalToBinary("456") == "111001000");
+    CHECK(checker.DecimalToBinary("-789") == "-1100010101");
+    CHECK(checker.DecimalToBinary("0") == "0");
+    CHECK(checker.DecimalToBinary("-0") == "0");
+    CHECK(checker.DecimalToBinary("9223372036854775807") == "111111111111111111111111111111111111111111111111111111111111111");
+    CHECK(checker.DecimalToBinary("-9223372036854775807") == "-111111111111111111111111111111111111111111111111111111111111111");
+    CHECK(checker.DecimalToBinary("0") == "0");
+    CHECK(checker.DecimalToBinary("1") == "1");
+    CHECK(checker.DecimalToBinary("10") == "1010");
+    CHECK(checker.DecimalToBinary("11") == "1011");
+    CHECK(checker.DecimalToBinary("100") == "1100100");
+    CHECK(checker.DecimalToBinary("1000") == "1111101000");
+    CHECK(checker.DecimalToBinary("-1") == "-1");
+    CHECK(checker.DecimalToBinary("-10") == "-1010");
+    CHECK(checker.DecimalToBinary("-11") == "-1011");
+    CHECK(checker.DecimalToBinary("-100") == "-1100100");
+    CHECK(checker.DecimalToBinary("-1000") == "-1111101000");
 }
 
 TEST_CASE("NumericChecker hexadecimal to binary Test") {
@@ -144,9 +166,15 @@ TEST_CASE("NumericChecker hexadecimal to binary Test") {
 
 TEST_CASE("NumericChecker Fraction to binary Test") {
     NumericChecker checker;
-    CHECK(checker.FractionToBinary("123.45", 3) == "1111011.011");
+    CHECK(checker.FractionToBinary("4.47", 3) == "100.011");
     CHECK(checker.FractionToBinary("123.456", 2) == "1111011.01");
     CHECK(checker.FractionToBinary("123.4567", 2) == "1111011.01");
+    CHECK(checker.FractionToBinary("0.47", 3) == "0.011");
+    CHECK(checker.FractionToBinary("0.456", 2) == "0.01");
+    CHECK(checker.FractionToBinary("0.4567", 2) == "0.01");
+    CHECK(checker.FractionToBinary("12.3", 3) == "1100.010");
+    CHECK(checker.FractionToBinary("1.23", 3) == "1.001");
+    CHECK(checker.FractionToBinary("1.234", 3) == "1.001");
 }
 
 #endif //HOMEWORK_TESTS_H

@@ -5,6 +5,7 @@
 #include "NumericChecker.h"
 
 #include <regex>
+#include <iostream>
 
 NumericChecker::NumericChecker() {}
 
@@ -42,26 +43,62 @@ std::map<std::string, std::string> NumericChecker::GetNumberTypes(
 }
 
 std::string NumericChecker::DecimalToBinary(const std::string &decimal) {
-    std::string result;
-    std::string num = decimal;
-    while (num != "0") {
-        std::string digit = std::to_string(std::stoi(num) % 2);
-        result = digit + result;
-        num = std::to_string(std::stoi(num) / 2);
+    bool is_negative = false;
+
+    if(decimal == "-0") return "0";
+
+    std::string copy = decimal;
+
+    if (copy[0] == '-') {
+        is_negative = true;
+        copy = copy.substr(1);
     }
-    return result.empty() ? "0" : result;
+
+
+    std::string result;
+    while (copy.size() > 0) {
+        int remainder = 0;
+        std::string new_copy;
+        for (const char &c: copy) {
+            int digit = c - '0';
+            digit += remainder * 10;
+            remainder = digit % 2;
+            new_copy += (digit / 2) + '0';
+        }
+        result = static_cast<char>(remainder + '0') + result;
+
+        copy = new_copy;
+
+        copy.erase(0, copy.find_first_not_of('0'));
+    }
+
+
+    if (is_negative) {
+        result = "-" + result;
+    }
+
+    return result;
+
 }
 
+
 std::string NumericChecker::FractionToBinary(const std::string &fraction, int max_digits) {
-    std::size_t decimal_pos = fraction.find('.');
-    std::string integer_part = fraction.substr(0, decimal_pos);
-    std::string fractional_part = fraction.substr(decimal_pos + 1);
+
+    std::size_t pos = fraction.find('.');
+
+    std::string integer_part = fraction.substr(0, pos);
+
     std::string binary = DecimalToBinary(integer_part);
-    binary += '.';
-    fractional_part = fractional_part;
-    binary += DecimalToBinary(fractional_part).substr(0, max_digits);
-    return binary;
+
+    std::string frac_num = "0." + fraction.substr(pos + 1);
+
+    double frac = std::stod(frac_num);
+
+    std::string fract = getFractionPart(frac, max_digits);
+
+    return binary += fract;
 }
+
 
 std::string NumericChecker::HexadecimalToBinary(const std::string &hexadecimal) {
     std::unordered_map<char, std::string> hex_to_bin = {
@@ -111,4 +148,21 @@ std::map<std::string, std::string> NumericChecker::GetBinaryRepresentations(
         binary_representations[number] = binary;
     }
     return binary_representations;
+}
+
+std::string NumericChecker::getFractionPart(double num, int precision) {
+
+    std::string frac = ".";
+    double fraction_part = modf(num, nullptr);
+    while (precision-- > 0) {
+        fraction_part *= 2;
+        if (fraction_part >= 1) {
+            frac += '1';
+            fraction_part -= 1;
+        } else {
+            frac += '0';
+        }
+    }
+
+    return frac;
 }

@@ -2,7 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "homework"
+			"path" : "homework.exe"
+		},
+		{
+			"path" : "homework.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -35,10 +38,10 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk"
+					"fragment" : "-g"
 				},
 				{
-					"fragment" : "-std=gnu++2b"
+					"fragment" : "-std=gnu++23"
 				}
 			],
 			"language" : "CXX",
@@ -71,12 +74,16 @@
 			{
 				"fragment" : "",
 				"role" : "flags"
+			},
+			{
+				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
+				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
 	"name" : "homework",
-	"nameOnDisk" : "homework",
+	"nameOnDisk" : "homework.exe",
 	"paths" : 
 	{
 		"build" : ".",

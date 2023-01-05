@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/c++ -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/homework.dir/main.cpp.o CMakeFiles/homework.dir/reading/NumbersReader.cpp.o CMakeFiles/homework.dir/separate/Separator.cpp.o CMakeFiles/homework.dir/numerics/NumericChecker.cpp.o -o homework 

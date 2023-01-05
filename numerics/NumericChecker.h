@@ -13,6 +13,7 @@
 #include <string>
 #include <unordered_map>
 #include <map>
+#include <cmath>
 
 class NumericChecker {
 public:
@@ -20,13 +21,13 @@ public:
 
     ~NumericChecker();
 
-    bool IsDecimal(const std::string &number) const;
+    [[nodiscard]] bool IsDecimal(const std::string &number) const;
 
-    bool IsHexadecimal(const std::string &number) const;
+    [[nodiscard]] bool IsHexadecimal(const std::string &number) const;
 
-    bool IsFraction(const std::string &number) const;
+    [[nodiscard]] bool IsFraction(const std::string &number) const;
 
-    std::map<std::string, std::string> GetNumberTypes(
+    [[nodiscard]] std::map<std::string, std::string> GetNumberTypes(
             const std::vector<std::string> &numbers) const;
 
     std::map<std::string, std::string> GetBinaryRepresentations(
@@ -38,6 +39,8 @@ public:
 
     std::string HexadecimalToBinary(const std::string &hexadecimal);
 private:
+
+    std::string getFractionPart(double frac, int digits);
 };
 
 
