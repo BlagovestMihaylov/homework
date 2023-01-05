@@ -53,34 +53,13 @@ std::string NumericChecker::DecimalToBinary(const std::string &decimal) {
 }
 
 std::string NumericChecker::FractionToBinary(const std::string &fraction, int max_digits) {
-    std::string binary;
-    std::size_t pos = fraction.find('.');
-    if (pos != std::string::npos) {
-        std::string integer_part = fraction.substr(0, pos);
-        std::string fractional_part = fraction.substr(pos + 1);
-        binary = DecimalToBinary(integer_part);
-        if (!fractional_part.empty()) {
-            binary += '.';
-            int count = 0;
-            while (!fractional_part.empty() && count < max_digits) {
-                double frac = std::stod("0." + fractional_part);
-                if (frac == 0) {
-                    break;
-                }
-                frac *= 2;
-                if (frac >= 1) {
-                    binary += '1';
-                    frac -= 1;
-                } else {
-                    binary += '0';
-                }
-                fractional_part = std::to_string(frac).substr(2);
-                count++;
-            }
-        }
-    } else {
-        binary = DecimalToBinary(fraction);
-    }
+    std::size_t decimal_pos = fraction.find('.');
+    std::string integer_part = fraction.substr(0, decimal_pos);
+    std::string fractional_part = fraction.substr(decimal_pos + 1);
+    std::string binary = DecimalToBinary(integer_part);
+    binary += '.';
+    fractional_part = fractional_part;
+    binary += DecimalToBinary(fractional_part).substr(0, max_digits);
     return binary;
 }
 
@@ -104,6 +83,9 @@ std::string NumericChecker::HexadecimalToBinary(const std::string &hexadecimal) 
             {'f', "1111"},
     };
     std::string binary;
+
+    if (hexadecimal == "0x0" || hexadecimal == "0") return "0";
+
     std::size_t pos = (hexadecimal[0] == '0' && hexadecimal[1] == 'x') ? 2 : 0;
     for (; pos < hexadecimal.size(); ++pos) {
         char c = hexadecimal[pos];

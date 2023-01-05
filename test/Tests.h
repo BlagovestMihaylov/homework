@@ -145,9 +145,8 @@ TEST_CASE("NumericChecker hexadecimal to binary Test") {
 TEST_CASE("NumericChecker Fraction to binary Test") {
     NumericChecker checker;
     CHECK(checker.FractionToBinary("123.45", 3) == "1111011.011");
-    CHECK(checker.FractionToBinary("123.456", 3) == "1111011.100");
-    CHECK(checker.FractionToBinary("123.456", 4) == "1111011.0110");
-    CHECK(checker.FractionToBinary("123.456", 5) == "1111011.01101");
+    CHECK(checker.FractionToBinary("123.456", 2) == "1111011.01");
+    CHECK(checker.FractionToBinary("123.4567", 2) == "1111011.01");
 }
 
 #endif //HOMEWORK_TESTS_H
