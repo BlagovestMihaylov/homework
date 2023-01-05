@@ -12,10 +12,13 @@
 
 class Separator {
 public:
-    void Separate(const std::vector<std::string>& input);
-    const std::vector<std::string>& GetSymbols() const;
-    const std::vector<std::string>& GetNumbers() const;
-    const std::stack<std::string>& GetInputAsStack() const;
+    void Separate(const std::vector<std::string> &input);
+
+    const std::vector<std::string> &GetSymbols() const;
+
+    const std::vector<std::string> &GetNumbers() const;
+
+    const std::stack<std::string> &GetInputAsStack() const;
 
 private:
     std::vector<std::string> symbols;

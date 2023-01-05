@@ -11,7 +11,7 @@ void NumbersReader::ReadNumbers() {
 std::vector<std::string> NumbersReader::SplitInput() const {
     std::istringstream iss(input);
     std::vector<std::string> input;
-    for (std::string word; iss >> word; ) {
+    for (std::string word; iss >> word;) {
         input.push_back(word);
     }
     SplitBraces(input);
@@ -22,9 +22,14 @@ std::string NumbersReader::getInput() const {
     return input;
 }
 
-void NumbersReader::SplitBraces(std::vector<std::string>& input) {
+void NumbersReader::setInput(const std::string &input) {
+    this->input = input;
+}
+
+
+void NumbersReader::SplitBraces(std::vector<std::string> &input) {
     std::vector<std::string> result;
-    for (const std::string& word : input) {
+    for (const std::string &word: input) {
         std::string w = word;
         std::size_t pos = w.find('(');
         while (pos != std::string::npos) {
