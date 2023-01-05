@@ -9,6 +9,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <stack>
 
 class NumbersReader {
 public:

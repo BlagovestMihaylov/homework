@@ -18,8 +18,7 @@
 
 class Tests {
 public:
-    static void init()
-    {
+    static void init() {
         doctest::Context().run();
     }
 
@@ -27,25 +26,23 @@ public:
 
 
 TEST_CASE("NumbersReader Test") {
-NumbersReader reader;
-reader.setInput("1 + 2 - 3 * 4 / 5 % 6 sqrt(7) 8");
-std::vector<std::string> input = reader.SplitInput();
-for (const std::string& word : input) {
-std::cout << "^" << word;
-}
-CHECK(input == std::vector<std::string>{"1", "+", "2", "-", "3", "*", "4", "/", "5", "%", "6", "sqrt", "(", "7", ")", "8"});
+    NumbersReader reader;
+    reader.setInput("1 + 2 - 3 * 4 / 5 % 6 sqrt(7)* 8");
+    std::vector<std::string> input = reader.SplitInput();
+    CHECK(input ==
+          std::vector<std::string>{"1", "+", "2", "-", "3", "*", "4", "/", "5", "%", "6", "sqrt", "(", "7", ")","*", "8"});
 }
 
 TEST_CASE("Separator Test") {
-Separator separator;
-separator.Separate(std::vector<std::string>{"1", "+", "2"});
-CHECK(separator.GetSymbols() == std::vector<std::string>{"+"});
-CHECK(separator.GetNumbers() == std::vector<std::string>{"1", "2"});
-std::stack<std::string> expected_input_as_stack;
-expected_input_as_stack.push("1");
-expected_input_as_stack.push("+");
-expected_input_as_stack.push("2");
-CHECK(separator.GetInputAsStack() == expected_input_as_stack);
+    Separator separator;
+    separator.Separate(std::vector<std::string>{"1", "+", "2"});
+    CHECK(separator.GetSymbols() == std::vector<std::string>{"+"});
+    CHECK(separator.GetNumbers() == std::vector<std::string>{"1", "2"});
+    std::stack<std::string> expected_input_as_stack;
+    expected_input_as_stack.push("1");
+    expected_input_as_stack.push("+");
+    expected_input_as_stack.push("2");
+    CHECK(separator.GetInputAsStack() == expected_input_as_stack);
 }
 
 
