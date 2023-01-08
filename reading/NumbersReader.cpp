@@ -4,7 +4,7 @@
 #include "NumbersReader.h"
 
 void NumbersReader::ReadNumbers() {
-    std::cout << "Enter a string: ";
+    std::cout << "\n\nEnter a string you want to calculate:";
     std::getline(std::cin, input);
 }
 

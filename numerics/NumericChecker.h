@@ -42,9 +42,13 @@ public:
     std::string BinaryToDecimal(const std::string &binary);
 
     std::string BinaryToHexadecimal(const std::string &binary);
+
+    std::vector<std::string>swapToBinary(std::vector<std::string> splittedInput, std::map<std::string, std::string> binaryRepresentation);
+
 private:
 
     std::string getFractionPart(double frac, int digits);
+
 
 };
 
