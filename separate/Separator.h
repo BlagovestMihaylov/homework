@@ -18,12 +18,16 @@ public:
 
     const std::vector<std::string> &GetNumbers() const;
 
-    const std::stack<std::string> &GetInputAsStack() const;
+    const std::stack<std::string> &GetInputAsRpn() const;
 
 private:
     std::vector<std::string> symbols;
     std::vector<std::string> numbers;
-    std::stack<std::string> input_as_stack;
+    std::stack<std::string> input_as_rpn;
+
+    bool HasHigherOrEqualPrecedence(const std::string &op1, const std::string &op2);
+
+    int GetOperatorPrecedence(const std::string &op);
 };
 
 #endif //HOMEWORK_SEPARATOR_H

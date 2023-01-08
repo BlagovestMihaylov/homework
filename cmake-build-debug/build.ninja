@@ -81,6 +81,14 @@ build CMakeFiles/homework.dir/numerics/NumericChecker.cpp.obj: CXX_COMPILER__hom
   TARGET_COMPILE_PDB = CMakeFiles\homework.dir\
   TARGET_PDB = homework.pdb
 
+build CMakeFiles/homework.dir/calculation/BinaryCalculator.cpp.obj: CXX_COMPILER__homework_Debug E$:/data-structures-2022-2023/homework/calculation/BinaryCalculator.cpp || cmake_object_order_depends_target_homework
+  DEP_FILE = CMakeFiles\homework.dir\calculation\BinaryCalculator.cpp.obj.d
+  FLAGS = -g -std=gnu++23
+  OBJECT_DIR = CMakeFiles\homework.dir
+  OBJECT_FILE_DIR = CMakeFiles\homework.dir\calculation
+  TARGET_COMPILE_PDB = CMakeFiles\homework.dir\
+  TARGET_PDB = homework.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target homework
@@ -89,7 +97,7 @@ build CMakeFiles/homework.dir/numerics/NumericChecker.cpp.obj: CXX_COMPILER__hom
 #############################################
 # Link the executable homework.exe
 
-build homework.exe: CXX_EXECUTABLE_LINKER__homework_Debug CMakeFiles/homework.dir/main.cpp.obj CMakeFiles/homework.dir/reading/NumbersReader.cpp.obj CMakeFiles/homework.dir/separate/Separator.cpp.obj CMakeFiles/homework.dir/numerics/NumericChecker.cpp.obj
+build homework.exe: CXX_EXECUTABLE_LINKER__homework_Debug CMakeFiles/homework.dir/main.cpp.obj CMakeFiles/homework.dir/reading/NumbersReader.cpp.obj CMakeFiles/homework.dir/separate/Separator.cpp.obj CMakeFiles/homework.dir/numerics/NumericChecker.cpp.obj CMakeFiles/homework.dir/calculation/BinaryCalculator.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\homework.dir
