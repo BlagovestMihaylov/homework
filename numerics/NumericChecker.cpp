@@ -45,7 +45,7 @@ std::map<std::string, std::string> NumericChecker::GetNumberTypes(
 std::string NumericChecker::DecimalToBinary(const std::string &decimal) {
     bool is_negative = false;
 
-    if(decimal == "-0") return "0";
+    if (decimal == "-0") return "0";
 
     std::string copy = decimal;
 
@@ -189,8 +189,6 @@ std::string NumericChecker::BinaryToHexadecimal(const std::string &binary) {
 }
 
 
-
-
 std::string NumericChecker::getFractionPart(double num, int precision) {
 
     std::string frac = ".";
@@ -206,4 +204,20 @@ std::string NumericChecker::getFractionPart(double num, int precision) {
     }
 
     return frac;
+}
+
+std::vector<std::string> NumericChecker::swapToBinary(std::vector<std::string> splittedInput,
+                                                      std::map<std::string, std::string> binaryRepresentation) {
+    std::vector<std::string> asBinary;
+
+    for (auto s: splittedInput) {
+
+        if (binaryRepresentation.contains(s))
+            asBinary.push_back(binaryRepresentation.at(s));
+        else
+            asBinary.push_back(s);
+    }
+
+    return asBinary;
+
 }
