@@ -30,7 +30,7 @@ public:
 
 TEST_CASE("NumbersReader Test") {
     NumbersReader reader;
-    reader.setInput("1 + 2 - 3 * 4 / 5 % 6 sqrt(7)* 8"); //thats a bug - spliting ( and ) with extraspace
+    reader.setInput("1 + 2 - 3 * 4 / 5 % 6 sqrt(7)* 8"); //that's a bug - spliting ( and ) with extraspace
     std::vector<std::string> input = reader.SplitInput();
     CHECK(input ==
           std::vector<std::string>{"1", "+", "2", "-", "3", "*", "4", "/", "5", "%", "6", "sqrt", "(", "7", ")", "*",
@@ -189,10 +189,39 @@ TEST_CASE("NumericChecker Fraction to binary Test") {
 }
 
 
+TEST_CASE("NumericChecker Binary to decimal Test") {
+    NumericChecker checker;
+    CHECK(checker.BinaryToDecimal("1") == "1");
+    CHECK(checker.BinaryToDecimal("10") == "2");
+    CHECK(checker.BinaryToDecimal("11") == "3");
+    CHECK(checker.BinaryToDecimal("100") == "4");
+    CHECK(checker.BinaryToDecimal("11001") == "25");
+    CHECK(checker.BinaryToDecimal("11010") == "26");
+    CHECK(checker.BinaryToDecimal("100000") == "32");
+    CHECK(checker.BinaryToDecimal("100101") == "37");
+    CHECK(checker.BinaryToDecimal("100110") == "38");
+    CHECK(checker.BinaryToDecimal("100111") == "39");
+}
+
+TEST_CASE("NumericChecker Binary to hexadecimal Test") {
+    NumericChecker checker;
+    CHECK(checker.BinaryToHexadecimal("1") == "1");
+    CHECK(checker.BinaryToHexadecimal("10") == "2");
+    CHECK(checker.BinaryToHexadecimal("11") == "3");
+    CHECK(checker.BinaryToHexadecimal("100") == "4");
+    CHECK(checker.BinaryToHexadecimal("1010") == "A");
+    CHECK(checker.BinaryToHexadecimal("1111") == "F");
+    CHECK(checker.BinaryToHexadecimal("1100100") == "64");
+    CHECK(checker.BinaryToHexadecimal("100000000") == "100");
+    CHECK(checker.BinaryToHexadecimal("10000000000") == "400");
+}
+
+
 TEST_CASE("BinaryCalculator Test") {
     BinaryCalculator calculator;
 
     CHECK(calculator.Add("1", "1") == "10");
+    CHECK(calculator.Add("1", "10") == "11");
     CHECK(calculator.Add("1", "0") == "1");
     CHECK(calculator.Add("0", "0") == "0");
     CHECK(calculator.Add("1010", "1111") == "11001");
@@ -204,9 +233,11 @@ TEST_CASE("BinaryCalculator Test") {
 
 TEST_CASE("BinaryCalculator Multiply Test") {
     BinaryCalculator calculator;
+    CHECK(calculator.Multiply("11", "100") == "1100");
     CHECK(calculator.Multiply("1010", "1001") == "1011010");
     CHECK(calculator.Multiply("110101", "100101") == "11110101001");
-    CHECK(calculator.Multiply("11010110101010101010101", "100101010101010101010101") == "1111101001110001110001011100011000111000111001");
+    CHECK(calculator.Multiply("11010110101010101010101", "100101010101010101010101") ==
+          "1111101001110001110001011100011000111000111001");
 }
 
 TEST_CASE("BinaryCalculator Subtract Test") {
@@ -226,6 +257,32 @@ TEST_CASE("BinaryCalculator Divide Test") {
     CHECK(calculator.Divide("111111111", "111") == "1001001");
     CHECK(calculator.Divide("11011", "11") == "1001");
     CHECK(calculator.Divide("100", "10") == "10");
+    CHECK(calculator.Divide("1100", "11") == "100");
+
+}
+
+TEST_CASE("BinaryCalculator Test - CalculateRPN") {
+    BinaryCalculator calculator;
+    std::stack<std::string> rpn;
+    rpn.push("101");
+    rpn.push("101");
+    rpn.push("+");
+    rpn.push("101");
+    rpn.push("+");
+    rpn.push("101");
+    rpn.push("-");
+    CHECK( calculator.evaluateRpn(rpn) == "1010" );
+
+    std::stack<std::string> rpn_complex;
+    rpn_complex.push("1");
+    rpn_complex.push("10");
+    rpn_complex.push("11");
+    rpn_complex.push("*");
+    rpn_complex.push("+");
+    rpn_complex.push("100");
+    rpn_complex.push("-");
+
+    CHECK( calculator.evaluateRpn(rpn_complex) == "11" );
 
 }
 

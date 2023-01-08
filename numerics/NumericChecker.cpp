@@ -23,7 +23,7 @@ bool NumericChecker::IsHexadecimal(const std::string &number) const {
 
 
 bool NumericChecker::IsFraction(const std::string &number) const {
-    std::regex fraction_regex("^[+-]?\\d+\\.\\d+$");
+    std::regex fraction_regex(R"(^[+-]?\d+\.\d+$)");
     return std::regex_match(number, fraction_regex);
 }
 
@@ -149,6 +149,47 @@ std::map<std::string, std::string> NumericChecker::GetBinaryRepresentations(
     }
     return binary_representations;
 }
+
+std::string NumericChecker::BinaryToDecimal(const std::string &binary) {
+    std::string result;
+    int value = 0;
+    int power = 1;
+    for (int i = binary.size() - 1; i >= 0; i--) {
+        if (binary[i] == '1') {
+            value += power;
+        }
+        power *= 2;
+    }
+    result = std::to_string(value);
+    return result;
+}
+
+std::string NumericChecker::BinaryToHexadecimal(const std::string &binary) {
+    std::string result;
+    int value = 0;
+    int power = 1;
+    for (int i = binary.size() - 1; i >= 0; i--) {
+        if (binary[i] == '1') {
+            value += power;
+        }
+        power *= 2;
+    }
+    result = "";
+    while (value > 0) {
+        int remainder = value % 16;
+        if (remainder < 10) {
+            result += std::to_string(remainder);
+        } else {
+            result += static_cast<char>(remainder - 10 + 'A');
+        }
+        value /= 16;
+    }
+    std::reverse(result.begin(), result.end());
+    return result;
+}
+
+
+
 
 std::string NumericChecker::getFractionPart(double num, int precision) {
 

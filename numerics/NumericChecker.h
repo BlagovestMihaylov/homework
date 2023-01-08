@@ -38,9 +38,14 @@ public:
     std::string FractionToBinary(const std::string &fraction, int max_digits);
 
     std::string HexadecimalToBinary(const std::string &hexadecimal);
+
+    std::string BinaryToDecimal(const std::string &binary);
+
+    std::string BinaryToHexadecimal(const std::string &binary);
 private:
 
     std::string getFractionPart(double frac, int digits);
+
 };
 
 
