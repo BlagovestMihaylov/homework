@@ -25,9 +25,9 @@ private:
     std::vector<std::string> numbers;
     std::stack<std::string> input_as_rpn;
 
+    int GetOperatorPrecedence(const std::string &op);
     bool HasHigherOrEqualPrecedence(const std::string &op1, const std::string &op2);
 
-    int GetOperatorPrecedence(const std::string &op);
 };
 
 #endif //HOMEWORK_SEPARATOR_H

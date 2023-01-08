@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
+#include <stack>
 
 
 class BinaryCalculator {
@@ -25,6 +26,17 @@ public:
 //    std::string SquareRoot(const std::string &number);
 
     std::string DivideByTwo(const std::string &binary);
+
+    std::string calculate(int a, int b, const std::string &operation);
+
+    bool isOperation(const std::string &op);
+
+    std::string calculate(std::string a, std::string, const std::string &operation);
+
+
+    std::string evaluateRpn(std::stack<std::string> rpn);
+
+    std::vector<std::string> stackToVector(std::stack<std::string> st);
 };
 
 

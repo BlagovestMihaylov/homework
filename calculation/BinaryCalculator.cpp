@@ -128,13 +128,65 @@ std::string BinaryCalculator::Divide(const std::string &a, const std::string &b)
     }
 
 
-    if (dividend == "0" || dividend.empty()) {
+    if (dividend == "0000" || dividend == "000" || dividend == "00" || dividend == "0" || dividend.empty()) {
         return quotient;
     }
 
     result = quotient + "." + dividend;
     return result;
 
+}
+
+std::string BinaryCalculator::calculate(std::string a, std::string b, const std::string &operation) {
+    if (operation == "+")
+        return Add(a, b);
+    if (operation == "-")
+        return Subtract(a, b);
+    if (operation == "*")
+        return Multiply(a, b);
+    if (operation == "/")
+        return Divide(a, b);
+    throw new std::exception;
+}
+
+bool BinaryCalculator::isOperation(const std::string &op) {
+    return op == "+" || op == "-" || op == "*" || op == "/";
+}
+
+std::string BinaryCalculator::evaluateRpn(std::stack<std::string> rpn) {
+
+    std::vector<std::string> notation = stackToVector(rpn);
+
+    std::stack<std::string> numbers;
+    for (const auto &str: notation) {
+        if (isOperation(str)) {
+            std::string n2 = numbers.top();
+            numbers.pop();
+            std::string n1 = numbers.top();
+            numbers.pop();
+
+            std::string calculation = calculate(n1, n2, str);
+
+            numbers.push(calculation);
+        } else
+            numbers.push(str);
+    }
+
+    return numbers.top();
+}
+
+
+std::vector<std::string> BinaryCalculator::stackToVector(std::stack<std::string> st) {
+
+    std::vector<std::string> res;
+
+    while (!st.empty()) {
+        res.push_back(st.top());
+        st.pop();
+    }
+    std::reverse(res.begin(), res.end());
+
+    return res;
 }
 
 
