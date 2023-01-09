@@ -151,40 +151,132 @@ std::map<std::string, std::string> NumericChecker::GetBinaryRepresentations(
 }
 
 std::string NumericChecker::BinaryToDecimal(const std::string &binary) {
-    std::string result;
-    int value = 0;
-    int power = 1;
-    for (int i = binary.size() - 1; i >= 0; i--) {
+    std::string decimal = "0";
+    std::vector<std::string> powers;
+    int length = binary.length();
+
+    for (int i = length - 1; i >= 0; --i) {
         if (binary[i] == '1') {
-            value += power;
-        }
-        power *= 2;
+            powers.push_back(powerOfTwo(length - 1 - i));
+        } else powers.push_back("0");
     }
-    result = std::to_string(value);
+
+    for (int i = 0; i < powers.size(); ++i) {
+        if (powers[i] != "0") { decimal = addNumbers(decimal, powers[i]); }
+    }
+
+    return decimal;
+}
+
+std::string NumericChecker::powerOfTwo(int power) {
+    std::string result = "1";
+    for (int i = 0; i < power; ++i) {
+        int carry = 0;
+        for (int j = result.length() - 1; j >= 0; --j) {
+            int digit = (result[j] - '0') * 2 + carry;
+            if (digit > 9) {
+                carry = 1;
+                digit -= 10;
+            } else {
+                carry = 0;
+            }
+            result[j] = '0' + digit;
+        }
+        if (carry == 1) {
+            result = '1' + result;
+        }
+    }
+    return result;
+}
+
+std::string NumericChecker::addNumbers(const std::string a, const std::string b) {
+    std::string result;
+    int carry = 0;
+    int lengthA = a.length();
+    int lengthB = b.length();
+    int maxLength = std::max(lengthA, lengthB);
+
+    for (int i = 0; i < maxLength; ++i) {
+        int digitA = i < lengthA ? a[lengthA - 1 - i] - '0' : 0;
+        int digitB = i < lengthB ? b[lengthB - 1 - i] - '0' : 0;
+        int sum = digitA + digitB + carry;
+        if (sum > 9) {
+            carry = 1;
+            sum -= 10;
+        } else {
+            carry = 0;
+        }
+        result = char('0' + sum) + result;
+    }
+
+    if (carry == 1) {
+        result = '1' + result;
+    }
+
     return result;
 }
 
 std::string NumericChecker::BinaryToHexadecimal(const std::string &binary) {
     std::string result;
-    int value = 0;
-    int power = 1;
-    for (int i = binary.size() - 1; i >= 0; i--) {
-        if (binary[i] == '1') {
-            value += power;
-        }
-        power *= 2;
+    int length = binary.length();
+
+    std::unordered_map<std::string, std::string> binaryHexMap = {
+            {"0000", "0"},
+            {"0001", "1"},
+            {"0010", "2"},
+            {"0011", "3"},
+            {"0100", "4"},
+            {"0101", "5"},
+            {"0110", "6"},
+            {"0111", "7"},
+            {"1000", "8"},
+            {"1001", "9"},
+            {"1010", "A"},
+            {"1011", "B"},
+            {"1100", "C"},
+            {"1101", "D"},
+            {"1110", "E"},
+            {"1111", "F"}
+    };
+
+    if(length == 4){
+        return binaryHexMap.at(binary);
     }
-    result = "";
-    while (value > 0) {
-        int remainder = value % 16;
-        if (remainder < 10) {
-            result += std::to_string(remainder);
-        } else {
-            result += static_cast<char>(remainder - 10 + 'A');
-        }
-        value /= 16;
+
+    length--;
+    std::vector<std::string> binaries;
+    while (length >= 3) {
+        std::string hexa;
+        hexa.push_back(binary[length - 3]);
+        hexa.push_back(binary[length - 2]);
+        hexa.push_back(binary[length - 1]);
+        hexa.push_back(binary[length]);
+        binaries.push_back(hexa);
+
+        if (length < 4) break;
+
+        length -= 4;
     }
-    std::reverse(result.begin(), result.end());
+    std::string hexa = "";
+
+    for (int i = 0; i <= length; ++i) {
+        hexa += binary[i];
+    }
+
+
+    if (hexa.size() > 0) {
+        while (hexa.size() != 4) {
+            hexa = "0" + hexa;
+        }
+        binaries.push_back(hexa);
+    }
+
+    for (std::string s: binaries) {
+        result += binaryHexMap.at(s);
+    }
+
+    reverse(result.begin(), result.end());
+
     return result;
 }
 
