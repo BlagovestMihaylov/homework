@@ -1,3 +1,5 @@
+подробно описание ще има [тук](https://github.com/BlagovestMihaylov/homework)
+
 # homework
 
 ## “Големите числа”
