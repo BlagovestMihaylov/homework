@@ -45,10 +45,14 @@ public:
 
     std::vector<std::string>swapToBinary(std::vector<std::string> splittedInput, std::map<std::string, std::string> binaryRepresentation);
 
+    std::string powerOfTwo(int power);
+
 private:
 
     std::string getFractionPart(double frac, int digits);
 
+
+    std::string addNumbers(const std::string a, const std::string b);
 
 };
 

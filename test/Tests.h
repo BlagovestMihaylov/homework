@@ -200,7 +200,7 @@ TEST_CASE("NumericChecker Binary to decimal Test") {
     CHECK(checker.BinaryToDecimal("100000") == "32");
     CHECK(checker.BinaryToDecimal("100101") == "37");
     CHECK(checker.BinaryToDecimal("100110") == "38");
-    CHECK(checker.BinaryToDecimal("100111") == "39");
+    CHECK(checker.BinaryToDecimal("101011110111011011111011101110100010010101011011100001100") == "98777888912488204");
 }
 
 TEST_CASE("NumericChecker Binary to hexadecimal Test") {
@@ -213,7 +213,7 @@ TEST_CASE("NumericChecker Binary to hexadecimal Test") {
     CHECK(checker.BinaryToHexadecimal("1111") == "F");
     CHECK(checker.BinaryToHexadecimal("1100100") == "64");
     CHECK(checker.BinaryToHexadecimal("100000000") == "100");
-    CHECK(checker.BinaryToHexadecimal("10000000000") == "400");
+    CHECK(checker.BinaryToHexadecimal("101011110111011011111011101110100010010101011011100001100") == "15EEDF7744AB70C");
 }
 
 
